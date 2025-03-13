@@ -17,8 +17,18 @@ export default class NagyKep {
     this.jobbElem = document.getElementsByClassName("jobb")[0];
     this.esemenykezelok();
   }
-
   esemenykezelok() {
+    /* feliratkozunk a saját eseményünkre */
+    window.addEventListener("kivalaszt", (event) => {
+      console.log(event.detail);
+      this.#aktIndex = event.detail;
+      new KiemeltKep(
+        this.#lista[this.#aktIndex].kep,
+        this.#lista[this.#aktIndex].cim,
+        this.nagyKepElem
+      );
+    });
+
     this.balElem.addEventListener("click", () => {
       this.#aktIndex--;
       this.#aktIndex < 0
